@@ -14,7 +14,11 @@ require('./bootstrap');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+import ShowsPage from './components/shows/ShowsPage.vue';
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    components: {
+        ShowsPage
+    }
 });
