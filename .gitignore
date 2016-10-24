@@ -1,7 +1,4 @@
 /node_modules
-/public/css
-/public/fonts
-/public/js
 /public/storage
 /vendor
 /.idea
