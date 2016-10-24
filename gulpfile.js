@@ -18,7 +18,7 @@ elixir(mix => {
        .webpack('app.js')
        .copy([
           './node_modules/bootstrap-sass/assets/fonts'
-        ], './public/fonts')
+        ], 'public/fonts')
         .browserSync({
           notify: false,
           proxy: 'asst.dev'
