@@ -7,7 +7,7 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
-// window.$ = window.jQuery = require('jquery');
+window.$ = window.jQuery = require('jquery');
 require('bootstrap-sass');
 
 /**
@@ -26,7 +26,9 @@ require('vue-resource');
  */
 
 Vue.http.interceptors.push((request, next) => {
-    request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+    if (!request.url.includes('tvmaze')) {
+        request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+    }
 
     next();
 });
