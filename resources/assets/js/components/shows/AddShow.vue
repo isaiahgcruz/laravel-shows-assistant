@@ -19,7 +19,7 @@
             <p>{{ result.show.name }} || {{ result.show.premiered }}</p>
             <p>{{ showSummary }}</p>
             <div class="pull-right">
-              <button class="btn btn-primary">Add Show</button>
+              <button class="btn btn-primary" @click="addShow">Add Show</button>
               <button class="btn btn-default" @click="result = false">Clear</button>
             </div>
           </div>
@@ -34,6 +34,12 @@
   export default {
     components: { Typeahead },
 
+    props: {
+      user: {
+        type: Object
+      }
+    },
+
     data () {
       return {
         templatePartial: '<span>{{ result.show.name }} | {{ result.show.premiered }}</span>',
@@ -46,6 +52,16 @@
       typeaheadSelect (result) {
         this.result = result
         this.typeaheadText = result.show.name
+      },
+      addShow () {
+        this.$http.post('api/users/' + this.user.id + '/shows', this.result)
+          .then((response) => {
+            this.result = false
+            window.alert('Show added successfully')
+            this.typeaheadText = ''
+          }, (response) => {
+            window.alert('An error occurred!')
+          })
       }
     },
 

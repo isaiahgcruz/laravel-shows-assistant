@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <add-show></add-show>
+    <add-show :user="user"></add-show>
     <div class="panel panel-default">
       <div class="panel-heading">Shows</div>
 
@@ -15,5 +15,11 @@
   import AddShow from './AddShow.vue';
   export default {
     components: { AddShow },
+
+    props: {
+      user: {
+        type: Object
+      }
+    }
   }
 </script>
