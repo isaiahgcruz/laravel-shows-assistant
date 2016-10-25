@@ -23,4 +23,21 @@ class EpisodeController extends Controller
         $episodes = Episode::whereIn('show_id', $showIds)->orderBy('airdate')->get()->toArray();
         return response($episodes, 200);
     }
+
+    /**
+     * Display upcoming episodes.
+     *
+     * @param  Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function upcoming(Request $request)
+    {
+        $user = $request->input('user');
+        $user = User::find($user['id']);
+        $showIds = $user->shows()->lists('shows.id');
+        $date = \Carbon\Carbon::now()->toDateString();
+        $episodes = Episode::whereIn('show_id', $showIds)->where('airdate', '>=', $date)
+            ->orderBy('airdate')->get()->groupby('airdate')->toArray();
+        return response($episodes, 200);
+    }
 }
