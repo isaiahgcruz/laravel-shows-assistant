@@ -18,3 +18,8 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::resource('users.shows', 'ShowController');
+
+Route::resource('episodes', 'EpisodeController',
+        ['only' => ['index']]);
+
+Route::resource('episodes/upcoming', 'EpisodeController@upcoming');

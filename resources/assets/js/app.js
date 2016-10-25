@@ -13,9 +13,6 @@ require('./bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
-import ShowsPage from './components/shows/ShowsPage.vue';
-
 /**
  * Initialize bus
  */
@@ -26,10 +23,13 @@ Object.defineProperty(Vue.prototype, '$bus', {
     }
 });
 
+import ShowsPage from './components/shows/ShowsPage.vue';
+import Dashboard from './components/Dashboard.vue';
+
 const app = new Vue({
     el: '#app',
     components: {
-        ShowsPage
+        ShowsPage, Dashboard
     },
     data: {
         bus
