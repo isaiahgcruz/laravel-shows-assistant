@@ -1,20 +1,16 @@
 <template>
   <div class="container">
     <add-show :user="user"></add-show>
-    <div class="panel panel-default">
-      <div class="panel-heading">Shows</div>
-
-      <div class="panel-body">
-        Shows list
-      </div>
-    </div>
+    <shows-list></shows-list>
   </div>
 </template>
 
 <script>
   import AddShow from './AddShow.vue';
+  import ShowsList from './ShowsList.vue';
+
   export default {
-    components: { AddShow },
+    components: { AddShow, ShowsList },
 
     props: {
       user: {
