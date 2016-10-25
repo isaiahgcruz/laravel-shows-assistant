@@ -74,6 +74,7 @@ class ShowController extends Controller
                 'name' => $show['name'], 
                 'timezone' => $show['network']['country']['timezone'],
             ]);
+            generateEpisodes($show['id']);
         }
 
         if (!$user->shows()->where('shows.id', $show['id'])->count()) {

@@ -36,4 +36,15 @@ class Show extends Model
     {
         return $this->belongsToMany('App\User');
     }
+
+    
+    /**
+     * Fetch show's episodes
+     * 
+     * @return Illuminate\Database\Eloquent\hasMany
+     */
+    public function episodes()
+    {
+        return $this->hasMany('App\Episode');
+    }
 }
