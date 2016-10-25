@@ -16,9 +16,22 @@ require('./bootstrap');
 Vue.component('example', require('./components/Example.vue'));
 import ShowsPage from './components/shows/ShowsPage.vue';
 
+/**
+ * Initialize bus
+ */
+const bus = new Vue();
+Object.defineProperty(Vue.prototype, '$bus', {
+    get() {
+        return this.$root.bus;
+    }
+});
+
 const app = new Vue({
     el: '#app',
     components: {
         ShowsPage
+    },
+    data: {
+        bus
     }
 });
