@@ -35,8 +35,10 @@ class EpisodeController extends Controller
         $user = $request->input('user');
         $user = User::find($user['id']);
         $showIds = $user->shows()->lists('shows.id');
-        $date = \Carbon\Carbon::now()->toDateString();
-        $episodes = Episode::whereIn('show_id', $showIds)->where('airdate', '>=', $date)
+        $date = \Carbon\Carbon::now();
+        $episodes = Episode::whereIn('show_id', $showIds)
+            ->where('airdate', '>=', $date->toDateString())
+            ->where('airdate', '<=', $date->addWeek())
             ->orderBy('airdate')->get()->groupby('airdate')->toArray();
         return response($episodes, 200);
     }
