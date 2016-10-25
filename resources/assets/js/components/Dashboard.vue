@@ -6,11 +6,19 @@
         Dashboard body
       </div>
     </div>
+
+    <upcoming-episodes></upcoming-episodes>
   </div>
 </template>
 
 <script>
+  import UpcomingEpisodes from './UpcomingEpisodes.vue'
+
   export default {
+    components: { 
+      UpcomingEpisodes
+    },
+
     props: {
       user: {
         type: Object
