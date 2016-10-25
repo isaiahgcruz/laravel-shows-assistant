@@ -59,6 +59,7 @@
             this.result = false
             window.alert('Show added successfully')
             this.typeaheadText = ''
+            this.$bus.$emit('shows-fetch-data')
           }, (response) => {
             window.alert('An error occurred!')
           })

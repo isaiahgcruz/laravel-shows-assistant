@@ -24,6 +24,9 @@
 
     created () {
       this.fetchData()
+      this.$bus.$on('shows-fetch-data', () => {
+        this.fetchData()
+      })
     },
 
     methods: {
