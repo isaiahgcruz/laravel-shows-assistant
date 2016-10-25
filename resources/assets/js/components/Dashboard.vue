@@ -17,9 +17,18 @@
         <div class="panel panel-default">
           <div class="panel-heading">Shortcuts</div>
           <div class="panel-body">
-            <button class="btn btn-default" 
-              @click="generateICS"
-            >Generate .ics</button>
+            <p>
+              <button class="btn btn-default" 
+                @click="generateICS"
+                :disabled="isLoading"
+              >Generate .ics</button>
+            </p>
+            <p>
+              <button class="btn btn-default"
+                @click="refreshEpisodes"
+                :disabled="isLoading"
+              >Refresh episodes</button>
+            </p>
           </div>
         </div>
       </div>
@@ -37,6 +46,12 @@
       UpcomingEpisodes
     },
 
+    data () {
+      return {
+        isLoading: false
+      }
+    },
+
     props: {
       user: {
         type: Object
@@ -48,6 +63,7 @@
         const params = {
           user: this.user
         }
+        this.isLoading = true
         this.$http.get('api/episodes/', { params })
           .then(({body}) => {
             const cal = new VCALENDAR()
@@ -64,6 +80,18 @@
             }
             console.log(cal.toBlob())
             download(cal.toBlob(), 'tvshows.ics', 'text/plain')
+          }).finally(() => {
+            this.isLoading = false
+          })
+      },
+      refreshEpisodes () {
+        this.isLoading = true
+        this.$http.post('api/episodes/refresh')
+          .then((response) => {
+            //insert code here
+            
+          }).finally(() => {
+            this.isLoading = false
           })
       }
     }

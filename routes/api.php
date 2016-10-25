@@ -23,3 +23,4 @@ Route::resource('episodes', 'EpisodeController',
         ['only' => ['index']]);
 
 Route::resource('episodes/upcoming', 'EpisodeController@upcoming');
+Route::post('episodes/refresh', 'EpisodeController@refreshEpisodes');

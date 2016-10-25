@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Episode;
 use App\Http\Requests;
+use App\Show;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -41,5 +42,15 @@ class EpisodeController extends Controller
             ->where('airdate', '<=', $date->addWeek())
             ->orderBy('airdate')->get()->groupby('airdate')->toArray();
         return response($episodes, 200);
+    }
+
+    public function refreshEpisodes(Request $request)
+    {
+        $shows = Show::all();
+        Episode::truncate();
+        foreach ($shows as $show) {
+            generateEpisodes($show->id);
+        }
+        return response('Finished generating episodes', 200);
     }
 }
