@@ -19,8 +19,8 @@
             <p>{{ result.show.name }} || {{ result.show.premiered }}</p>
             <p>{{ showSummary }}</p>
             <div class="pull-right">
-              <button class="btn btn-primary" @click="addShow">Add Show</button>
-              <button class="btn btn-default" @click="result = false">Clear</button>
+              <button :disabled="isLoading" class="btn btn-primary" @click="addShow">Add Show</button>
+              <button :disabled="isLoading" class="btn btn-default" @click="result = false">Clear</button>
             </div>
           </div>
         </div>
@@ -44,7 +44,8 @@
       return {
         templatePartial: '<span>{{ result.show.name }} | {{ result.show.premiered }}</span>',
         result: false,
-        typeaheadText: ''
+        typeaheadText: '',
+        isLoading: false
       }
     },
 
@@ -54,6 +55,7 @@
         this.typeaheadText = result.show.name
       },
       addShow () {
+        this.isLoading = true
         this.$http.post('api/users/' + this.user.id + '/shows', this.result)
           .then((response) => {
             this.result = false
@@ -62,6 +64,8 @@
             this.$bus.$emit('shows-fetch-data')
           }, (response) => {
             window.alert('An error occurred!')
+          }).finally(() => {
+            this.isLoading = false
           })
       }
     },
