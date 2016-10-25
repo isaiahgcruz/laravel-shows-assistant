@@ -26,4 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Fetch User's shows
+     * 
+     * @return hasMany
+     */
+    public function shows()
+    {
+        return $this->belongsToMany('App\Show');
+    }
 }
