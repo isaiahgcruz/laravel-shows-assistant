@@ -18,10 +18,10 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::resource('users.shows', 'ShowController',
-        ['only' => ['index', 'store']]);
+        ['only' => ['index', 'store', 'destroy']]);
 
 Route::resource('episodes', 'EpisodeController',
         ['only' => ['index']]);
 
-Route::resource('episodes/upcoming', 'EpisodeController@upcoming');
+Route::get('episodes/upcoming', 'EpisodeController@upcoming');
 Route::post('episodes/refresh', 'EpisodeController@refreshEpisodes');

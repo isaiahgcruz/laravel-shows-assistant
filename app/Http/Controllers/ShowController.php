@@ -129,12 +129,14 @@ class ShowController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  App\User
+     * @param  App\Show
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user, Show $show)
     {
-        //
+        $user->shows()->detach($show);
+        return response('', 200);
     }
 }
     
