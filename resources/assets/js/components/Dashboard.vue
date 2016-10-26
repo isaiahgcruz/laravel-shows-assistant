@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <alert></alert>
     <div class="panel panel-default">
       <div class="panel-heading">Dashboard</div>
       <div class="panel-body">
@@ -35,10 +36,11 @@
 <script>
   import UpcomingEpisodes from './UpcomingEpisodes.vue'
   import Generator from './Generator.vue'
+  import Alert from './Alert.vue'
 
   export default {
     components: { 
-      UpcomingEpisodes, Generator
+      UpcomingEpisodes, Generator, Alert
     },
 
     data () {
@@ -58,7 +60,9 @@
         this.isLoading = true
         this.$http.post('api/episodes/refresh')
           .then((response) => {
-            //insert code here            
+            this.$bus.$emit('show-alert', 'alert alert-success', 'Episodes refreshed')
+          }, (response) => {
+            this.$bus.$emit('show-alert', 'alert alert-danger', 'An error occurred')
           }).finally(() => {
             this.isLoading = false
           })
