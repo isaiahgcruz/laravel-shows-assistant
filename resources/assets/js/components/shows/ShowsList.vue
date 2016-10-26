@@ -31,7 +31,7 @@
 
     methods: {
       fetchData () {
-        this.$http.get('api/users/' + this.$parent.user.id + '/shows')
+        this.$http.get('api/users/' + user.id + '/shows')
           .then((response) => {
             this.shows = response.body
           }, (response) => {

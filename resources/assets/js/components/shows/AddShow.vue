@@ -34,12 +34,6 @@
   export default {
     components: { Typeahead },
 
-    props: {
-      user: {
-        type: Object
-      }
-    },
-
     data () {
       return {
         templatePartial: '<span>{{ result.show.name }} | {{ result.show.premiered }}</span>',
@@ -56,7 +50,7 @@
       },
       addShow () {
         this.isLoading = true
-        this.$http.post('api/users/' + this.user.id + '/shows', this.result)
+        this.$http.post('api/users/' + user.id + '/shows', this.result)
           .then((response) => {
             this.result = false
             this.typeaheadText = ''

@@ -20,7 +20,3 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::get('/shows', 'PageController@shows');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});

@@ -6,11 +6,11 @@
         <upcoming-episodes></upcoming-episodes>
       </div>
       <div class="col-md-6 col-sm-4">
-        <add-show :user="user"></add-show>
+        <add-show></add-show>
         <shows-list></shows-list>
       </div>
       <div class="col-md-3 col-sm-4">
-        <generator :user="user"></generator>
+        <generator></generator>
         <div class="panel panel-default">
           <div class="panel-heading">Shortcuts</div>
           <div class="panel-body">
@@ -43,12 +43,6 @@
     data () {
       return {
         isLoading: false
-      }
-    },
-
-    props: {
-      user: {
-        type: Object
       }
     },
 
