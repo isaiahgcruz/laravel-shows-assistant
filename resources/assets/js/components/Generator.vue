@@ -31,16 +31,10 @@
       }
     },
 
-    props: {
-      user: {
-        required: true
-      }
-    },
-
     methods: {
       generateICS () {
         const params = {
-          user: this.user,
+          user,
           config: this.startDate
         }
         this.isLoading = true

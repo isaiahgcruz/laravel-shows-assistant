@@ -30,7 +30,7 @@
     methods: {
       fetchData () {
         const params = {
-          user: this.$parent.user
+          user
         }
         this.$http.get('api/episodes/upcoming', { params })
           .then((response) => {
