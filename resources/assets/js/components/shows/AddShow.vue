@@ -62,6 +62,7 @@
             this.typeaheadText = ''
             this.$bus.$emit('shows-fetch-data')
             this.$bus.$emit('show-alert', 'alert alert-success', 'Show added successfully')
+            this.$bus.$emit('upcoming-episodes-fetch-data')
           }, (response) => {
             this.$bus.$emit('show-alert', 'alert alert-danger', 'An error occurred')
           }).finally(() => {

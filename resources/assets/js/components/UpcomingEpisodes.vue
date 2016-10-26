@@ -22,6 +22,9 @@
 
     created () {
       this.fetchData()
+      this.$bus.$on('upcoming-episodes-fetch-data', () => {
+        this.fetchData()
+      })
     },
 
     methods: {
