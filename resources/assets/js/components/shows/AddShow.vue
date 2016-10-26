@@ -59,11 +59,11 @@
         this.$http.post('api/users/' + this.user.id + '/shows', this.result)
           .then((response) => {
             this.result = false
-            window.alert('Show added successfully')
             this.typeaheadText = ''
             this.$bus.$emit('shows-fetch-data')
+            this.$bus.$emit('show-alert', 'alert alert-success', 'Show added successfully')
           }, (response) => {
-            window.alert('An error occurred!')
+            this.$bus.$emit('show-alert', 'alert alert-danger', 'An error occurred')
           }).finally(() => {
             this.isLoading = false
           })
