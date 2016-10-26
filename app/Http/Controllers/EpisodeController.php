@@ -21,8 +21,39 @@ class EpisodeController extends Controller
         $user = $request->input('user');
         $user = User::find($user['id']);
         $showIds = $user->shows()->lists('shows.id');
-        $episodes = Episode::whereIn('show_id', $showIds)->orderBy('airdate')->get()->toArray();
-        return response($episodes, 200);
+        $dt = \Carbon\Carbon::now();
+        $config = $request->input('config');
+        $query;
+        switch($config) {
+            case 1:
+                $showIds = $user->shows()->lists('shows.id');
+                $query = Episode::whereIn('show_id', $showIds)->orderBy('airdate');
+                break;
+            case 2:
+                $showIds = $user->shows()->lists('shows.id');
+                $query = Episode::whereIn('show_id', $showIds)->orderBy('airdate');
+                $query = $query->where('airdate', '>=', $dt->toDateString());
+                break;
+            case 3:
+                $shows = $user->shows;
+                $episodes = [];
+                foreach ($shows as $show) {
+                    $lastSeason = $show->episodes()->orderBy('season', 'desc')->first()->season;
+                    $episodes = array_merge($episodes, 
+                        $show->episodes()->where('season', $lastSeason)->orderBy('airdate')->get()->toArray());
+                }
+                return response($episodes, 200);
+                break;
+            case 4:
+                $showIds = $user->shows()->lists('shows.id');
+                $query = Episode::whereIn('show_id', $showIds)->orderBy('airdate');
+                $query = $query->where('airdate', '>=', $dt->setDate($dt->year, $dt->month, 1)->toDateString());
+                break;
+            default:
+                break;
+        }
+        $query = $query->get()->toArray();
+        return response($query, 200);
     }
 
     /**
