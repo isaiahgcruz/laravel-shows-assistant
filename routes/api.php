@@ -17,7 +17,8 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::resource('users.shows', 'ShowController');
+Route::resource('users.shows', 'ShowController',
+        ['only' => ['index', 'store']]);
 
 Route::resource('episodes', 'EpisodeController',
         ['only' => ['index']]);
