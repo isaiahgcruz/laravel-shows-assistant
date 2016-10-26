@@ -70,9 +70,17 @@ class ShowController extends Controller
         if ($exists) {
             $exists->update(['name' => $show['name']]);
         } else {
+            $timezone = "";
+            if ($show['network']) {
+                $timezone = $show['network']['country']['timezone'];
+            } else ($show['webChannel']){
+                $timezone = $show['webChannel']['country']['timezone'];
+            } else {
+                $timezone = \Config::get('app.timezone');
+            }
             Show::create(['id' => $show['id'], 
                 'name' => $show['name'], 
-                'timezone' => $show['network']['country']['timezone'],
+                'timezone' => $timezone,
             ]);
             generateEpisodes($show['id']);
         }
