@@ -60,6 +60,9 @@
             }
             console.log(cal.toBlob())
             download(cal.toBlob(), 'tvshows.ics', 'text/plain')
+            this.$bus.$emit('show-alert', 'alert alert-success', 'ICS Generated [' + body.length + ' entries]')
+          }, (response) => {
+            this.$bus.$emit('show-alert', 'alert alert-danger', 'An error occurred')
           }).finally(() => {
             this.isLoading = false
           })
