@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <confirm-modal></confirm-modal>
     <alert></alert>
     <div class="row">
       <div class="col-md-3 col-sm-4">
@@ -34,10 +35,11 @@
   import Alert from './Alert.vue'
   import AddShow from './shows/AddShow.vue';
   import ShowsList from './shows/ShowsList.vue';
+  import ConfirmModal from './ConfirmModal.vue';
 
   export default {
     components: { 
-      UpcomingEpisodes, Generator, Alert, AddShow, ShowsList
+      UpcomingEpisodes, Generator, Alert, AddShow, ShowsList, ConfirmModal
     },
 
     data () {
