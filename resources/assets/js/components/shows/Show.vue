@@ -21,6 +21,9 @@
     },
 
     methods: {
+      /**
+       * Method for calling the confirm modal
+       */
       removeShow () {
         const messages = ["Are you sure you want to delete ["+ this.show.name +"]?"]
         const link = 'api/users/' + user.id + '/shows/' + this.show.id
@@ -30,6 +33,10 @@
         const alert = 'Show successfully deleted'
         this.$bus.$emit('show-confirm-modal', messages, link, method, payLoad, callback, alert)
       },
+
+      /**
+       * Callback method when the deletion is confirmed
+       */
       removeShowSuccess () {
         this.$bus.$emit('shows-fetch-data')
         this.$bus.$emit('upcoming-episodes-fetch-data')

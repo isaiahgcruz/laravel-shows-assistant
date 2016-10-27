@@ -23,13 +23,12 @@ Object.defineProperty(Vue.prototype, '$bus', {
     }
 });
 
-import ShowsPage from './components/shows/ShowsPage.vue';
 import Dashboard from './components/Dashboard.vue';
 
 const app = new Vue({
     el: '#app',
     components: {
-        ShowsPage, Dashboard
+        Dashboard
     },
     data: {
         bus

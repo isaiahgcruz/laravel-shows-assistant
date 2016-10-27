@@ -23,7 +23,11 @@
 
 <script>
   import { VCALENDAR, VEVENT } from 'ics-js'
+
   export default {
+    /**
+     * Component's data
+     */
     data () {
       return {
         isLoading: false,
@@ -32,6 +36,9 @@
     },
 
     methods: {
+      /**
+       * Generates the .ics file
+       */
       generateICS () {
         const params = {
           user,
@@ -52,7 +59,6 @@
               event.addProp('DTEND', new Date(body[i].end), { VALUE: 'DATE-TIME' });
               cal.addComponent(event)
             }
-            console.log(cal.toBlob())
             download(cal.toBlob(), 'tvshows.ics', 'text/plain')
             this.$bus.$emit('show-alert', 'alert alert-success', 'ICS Generated [' + body.length + ' entries]')
           }, (response) => {
@@ -64,8 +70,9 @@
     }
   }
 
-
-
+  /**
+   * File download function
+   */
   function download(content, filename, contentType) {
     if(!contentType) contentType = 'application/octet-stream';
     var a = document.createElement('a');

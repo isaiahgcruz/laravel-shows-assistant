@@ -14,6 +14,9 @@
 
 <script>
   export default {
+    /**
+     * Component's data
+     */
     data () {
       return {
         upcomingShows: false
@@ -28,6 +31,9 @@
     },
 
     methods: {
+      /**
+       * Gets all the upcoming episodes for the users
+       */
       fetchData () {
         const params = {
           user

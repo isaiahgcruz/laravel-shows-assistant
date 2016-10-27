@@ -46,6 +46,9 @@
     },  
 
     components: {
+      /**
+       * Component for the template to be shown on the list
+       */
       partial: {
         template: '<div>{{ templatePartial }}</div>',
 
@@ -66,11 +69,17 @@
     },
 
     watch: {
+      /**
+       * Updates the search text
+       */
       inputText (val) {
         this.queryString = val  
       }
     },
 
+    /**
+     * Component's data
+     */
     data () {
       return {
         results: {},
@@ -82,6 +91,9 @@
     },
 
     methods: {
+      /**
+       * API Call to populate results
+       */
       update: _.debounce(function () {
           this.$http.get(this.apiUri + this.queryString)
             .then((response) => {
@@ -90,19 +102,35 @@
             })
         }, 500)
       ,
+
+      /**
+       * Key up method
+       */
       up () {
         if (this.currentIndex > 0) {
           this.currentIndex -= 1
         }
       },
+
+      /**
+       * Key down method
+       */
       down () {
         if (this.currentIndex < this.results.length) {
           this.currentIndex += 1 
         }
       },
+
+      /**
+       * Class check if the result is active
+       */
       isActive (index) {
         return this.currentIndex === index
       },
+
+      /**
+       * Select a result
+       */
       hit () {
         this.openDropdown = false
         this.successCallback(this.results[this.currentIndex])

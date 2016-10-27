@@ -16,6 +16,9 @@
       Show
     },
 
+    /**
+     * Component's data
+     */
     data () {
       return {
         shows: false
@@ -30,6 +33,9 @@
     },
 
     methods: {
+      /**
+       * Gets all the shows added by the user
+       */
       fetchData () {
         this.$http.get('api/users/' + user.id + '/shows')
           .then((response) => {

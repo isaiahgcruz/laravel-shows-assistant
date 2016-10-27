@@ -42,6 +42,9 @@
       UpcomingEpisodes, Generator, Alert, AddShow, ShowsList, ConfirmModal
     },
 
+    /**
+     * Component's data
+     */
     data () {
       return {
         isLoading: false
@@ -49,6 +52,9 @@
     },
 
     methods: {
+      /**
+       * API Call to refresh all the shows' episodes
+       */
       refreshEpisodes () {
         this.isLoading = true
         this.$http.post('api/episodes/refresh')

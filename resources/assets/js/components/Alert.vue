@@ -7,6 +7,9 @@
 
 <script>
   export default {
+    /**
+     * Component's data
+     */
     data () {
       return {
         show: false,
@@ -16,6 +19,9 @@
     },
 
     watch: {
+      /**
+       * Timeout for the component to hide in 3 seconds
+       */
       show(val) {
         if (val) {
           window.setTimeout(() => {
@@ -32,6 +38,9 @@
     },
 
     methods: {
+      /**
+       * Show's the alert
+       */
       showAlert (className, message) {
         this.className = className;
         this.message = message;

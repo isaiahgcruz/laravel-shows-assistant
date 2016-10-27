@@ -31,9 +31,13 @@
 
 <script>
   import Typeahead from '../Typeahead.vue'
+
   export default {
     components: { Typeahead },
 
+    /**
+     * Component's data
+     */
     data () {
       return {
         templatePartial: '<span>{{ result.show.name }} | {{ result.show.premiered }}</span>',
@@ -44,10 +48,17 @@
     },
 
     methods: {
+      /**
+       * Callback when a result is selected
+       */
       typeaheadSelect (result) {
         this.result = result
         this.typeaheadText = result.show.name
       },
+
+      /**
+       * Adds the show to the user
+       */
       addShow () {
         this.isLoading = true
         this.$http.post('api/users/' + user.id + '/shows', this.result)
@@ -76,6 +87,9 @@
     }
   }
 
+  /**
+   * Strips the html tags
+   */
   function strip(html)
   {
      var tmp = document.createElement("DIV");
