@@ -22,13 +22,17 @@
 
     methods: {
       removeShow () {
-        this.$http.delete('api/users/' + user.id + '/shows/' + this.show.id)
-          .then((response) => {
-            this.$bus.$emit('show-alert', 'alert alert-success', 'Show successfully removed')
-          }).finally(() => {
-            this.$bus.$emit('upcoming-episodes-fetch-data')
-            this.$bus.$emit('shows-fetch-data')
-          })
+        const messages = ["Are you sure you want to delete ["+ this.show.name +"]?"]
+        const link = 'api/users/' + user.id + '/shows/' + this.show.id
+        const method = 'delete'
+        const payLoad = {}
+        const callback = this.removeShowSuccess
+        const alert = 'Show successfully deleted'
+        this.$bus.$emit('show-confirm-modal', messages, link, method, payLoad, callback, alert)
+      },
+      removeShowSuccess () {
+        this.$bus.$emit('shows-fetch-data')
+        this.$bus.$emit('upcoming-episodes-fetch-data')
       }
     }
   }
